@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'dev.xiyang的博客',
-  author: 'dev.xiyang',
+  author: 'devxiyang',
   headerTitle: 'Dev.Xiyang',
   description: 'xiyang的个人博客,记录生活和工作的点点滴滴',
   language: 'zh-cn',
