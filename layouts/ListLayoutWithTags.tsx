@@ -29,8 +29,8 @@ function Pagination({ totalPages, currentPage, pathPrefix = "" }: PaginationProp
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
-  let prePageUrl = currentPage - 1 === 1 ? `/${basePath}/` : (pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage - 1}` : `/${basePath}/page/${currentPage - 1}`)
-  let nextPageUrl = pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage + 1}` : `/${basePath}/page/${currentPage + 1}`
+  const prePageUrl = currentPage - 1 === 1 ? `/${basePath}/` : (pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage - 1}` : `/${basePath}/page/${currentPage - 1}`)
+  const nextPageUrl = pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage + 1}` : `/${basePath}/page/${currentPage + 1}`
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
