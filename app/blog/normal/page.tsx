@@ -8,7 +8,7 @@ const POSTS_PER_PAGE = 5
 export const metadata = genPageMetadata({ title: 'Blog' })
 
 export default function BlogPage() {
-  const contents = allBlogs.filter((post) => post.path.startsWith('normal'))
+  const contents = allBlogs.filter((post) => post.path.startsWith('blog/normal'))
 
   const posts = allCoreContent(sortPosts(contents))
   const pageNumber = 1
@@ -17,6 +17,7 @@ export default function BlogPage() {
     POSTS_PER_PAGE * pageNumber
   )
   const pagination = {
+    pathPrefix: 'normal',
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }

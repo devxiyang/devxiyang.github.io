@@ -14,6 +14,7 @@ import tagData from 'app/tag-data.json'
 interface PaginationProps {
   totalPages: number
   currentPage: number
+  pathPrefix?: string
 }
 interface ListLayoutProps {
   posts: CoreContent<Blog>[]
@@ -22,11 +23,14 @@ interface ListLayoutProps {
   pagination?: PaginationProps
 }
 
-function Pagination({ totalPages, currentPage }: PaginationProps) {
+function Pagination({ totalPages, currentPage, pathPrefix = "" }: PaginationProps) {
   const pathname = usePathname()
   const basePath = pathname.split('/')[1]
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
+
+  let prePageUrl = currentPage - 1 === 1 ? `/${basePath}/` : (pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage - 1}` : `/${basePath}/page/${currentPage - 1}`)
+  let nextPageUrl = pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage + 1}` : `/${basePath}/page/${currentPage + 1}`
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -38,7 +42,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
         )}
         {prevPage && (
           <Link
-            href={currentPage - 1 === 1 ? `/${basePath}/` : `/${basePath}/page/${currentPage - 1}`}
+            href={prePageUrl}
             rel="prev"
           >
             Previous
@@ -53,7 +57,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next">
+          <Link href={nextPageUrl} rel="next">
             Next
           </Link>
         )}
@@ -155,7 +159,7 @@ export default function ListLayoutWithTags({
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
+              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} pathPrefix={pagination.pathPrefix} />
             )}
           </div>
         </div>
