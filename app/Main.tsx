@@ -5,7 +5,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import SocialIcon from '@/components/social-icons'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 2
 
 export default function Home({ posts }) {
   return (
@@ -102,7 +102,7 @@ export default function Home({ posts }) {
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
-            href="/blog/articles"
+            href="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label="All posts"
           >
