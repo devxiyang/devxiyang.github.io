@@ -54,7 +54,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
     sortPosts(allBlogs.filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag)))
   )
 
-  console.log('原始tag:', params.tag, '解码tag:', tag, '过滤的帖子:', filteredPosts.length)
+  // console.log('原始tag:', params.tag, '解码tag:', tag, '过滤的帖子:', filteredPosts.length)
 
   if (filteredPosts.length === 0) {
     // return notFound()

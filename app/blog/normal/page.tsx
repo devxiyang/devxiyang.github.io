@@ -17,7 +17,6 @@ export default function BlogPage() {
     POSTS_PER_PAGE * pageNumber
   )
   const pagination = {
-    pathPrefix: 'normal',
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }

@@ -10,11 +10,11 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import tagData from 'app/tag-data.json'
+import { pathJoin } from '@/utils/path'
 
 interface PaginationProps {
   totalPages: number
   currentPage: number
-  pathPrefix?: string
 }
 interface ListLayoutProps {
   posts: CoreContent<Blog>[]
@@ -23,14 +23,20 @@ interface ListLayoutProps {
   pagination?: PaginationProps
 }
 
-function Pagination({ totalPages, currentPage, pathPrefix = "" }: PaginationProps) {
+function Pagination({ totalPages, currentPage }: PaginationProps) {
   const pathname = usePathname()
-  const basePath = pathname.split('/')[1]
+
+  // The base path before "page".
+  const match = pathname.match(/^(.*?)(\/page(?:\/|$))/);
+  const basePath = match ? match[1] : pathname; // 如果匹配成功，返回前半部分；否则返回原路径
+
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
-  const prePageUrl = currentPage - 1 === 1 ? `/${basePath}/` : (pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage - 1}` : `/${basePath}/page/${currentPage - 1}`)
-  const nextPageUrl = pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage + 1}` : `/${basePath}/page/${currentPage + 1}`
+  const prePageUrl = currentPage - 1 === 1 ? pathJoin(basePath) : pathJoin(basePath, 'page', `${currentPage - 1}`)
+  const nextPageUrl = pathJoin(basePath, 'page', `${currentPage + 1}`)
+  // const prePageUrl = currentPage - 1 === 1 ? `/${basePath}/` : (pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage - 1}` : `/${basePath}/${pathPrefix}/page/${currentPage - 1}`)
+  // const nextPageUrl = pathPrefix !== "" ? `/${basePath}/${pathPrefix}/page/${currentPage + 1}` : `/${basePath}/page/${currentPage + 1}`
 
   return (
     <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -159,7 +165,7 @@ export default function ListLayoutWithTags({
               })}
             </ul>
             {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} pathPrefix={pagination.pathPrefix} />
+              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
             )}
           </div>
         </div>
