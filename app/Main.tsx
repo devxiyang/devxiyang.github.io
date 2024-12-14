@@ -5,7 +5,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import SocialIcon from '@/components/social-icons'
 
-const MAX_DISPLAY = 2
+const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
   return (
