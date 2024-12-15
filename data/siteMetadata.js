@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'dev.xiyang的博客',
   author: 'devxiyang',
   headerTitle: 'Dev.Xiyang',
-  description: 'xiyang的个人博客,记录生活和工作的点点滴滴',
+  description: 'xiyang的个人博客,记录生活的点点滴滴',
   language: 'zh-cn',
   theme: 'light', // system, dark or light
   siteUrl: 'https://devxiyang.github.io',
