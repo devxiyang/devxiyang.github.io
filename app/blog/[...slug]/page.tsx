@@ -53,6 +53,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.summary,
+    keywords: post.keywords? post.keywords : post.tags.join(', '),
     openGraph: {
       title: post.title,
       description: post.summary,
@@ -69,7 +70,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title: post.title,
       description: post.summary,
-      images: imageList,
+      images: ogImages,
     },
   }
 }
